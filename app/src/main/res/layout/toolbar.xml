@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:background="@android:color/transparent"
+    android:paddingEnd="16dp"
+    app:elevation="8dp">
+
+    <RelativeLayout
+        android:id="@+id/toolBarHolder"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="?actionBarSize">
+
+        <ImageView
+            android:id="@+id/imgSignUpBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingVertical="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_ios_forward_outline" />
+
+
+        <ImageView
+            android:id="@+id/toolbarText"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:layout_toEndOf="@+id/imgSignUpBack"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>
