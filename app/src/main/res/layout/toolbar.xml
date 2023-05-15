@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
-    android:layoutDirection="ltr"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:layout_alignParentStart="true"
     android:layout_alignParentTop="true"
     android:layout_alignParentEnd="true"
     android:background="@android:color/transparent"
+    android:layoutDirection="ltr"
     android:paddingEnd="16dp"
     app:elevation="8dp">
 
     <RelativeLayout
         android:id="@+id/toolBarHolder"
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_height="?actionBarSize">
+        android:layout_height="?actionBarSize"
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/imgSignUpBack"
@@ -26,7 +26,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:paddingVertical="@dimen/_8sdp"
-            android:src="@drawable/ic_arrow_ios_forward_outline" />
+            android:src="@drawable/baseline_arrow_back_24" />
 
 
         <ImageView

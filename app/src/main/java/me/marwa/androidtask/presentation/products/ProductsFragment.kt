@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import me.marwa.androidtask.R
 import me.marwa.androidtask.databinding.FragmentProductsBinding
+import me.marwa.androidtask.utils.showToast
 
-
+@AndroidEntryPoint
 class ProductsFragment : Fragment() {
+    private val viewModel by viewModels<ProductsViewModel>()
     private lateinit var adapter: ProductsAdapter
-    private lateinit var binding: FragmentProductsBinding
-
+    private var _binding: FragmentProductsBinding? = null
+    val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -26,8 +30,8 @@ class ProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentProductsBinding.inflate(inflater, container, false)
-        return binding.rvProducts
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,16 +41,23 @@ class ProductsFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-
+        viewModel.productsLiveData.observe(viewLifecycleOwner) {
+            it?.fold({
+                adapter.listDiffer.submitList(it?.products)
+            }, {
+                showToast(it?.getMessage())
+            })
+        }
     }
 
     private fun initViews() {
         setupProductRV()
+        viewModel.getProducts()
     }
 
     private fun setupProductRV() {
         context?.let { context ->
-            val linearLayoutManager = GridLayoutManager(context,2)
+            val linearLayoutManager = GridLayoutManager(context, 2)
             binding.rvProducts.layoutManager = linearLayoutManager
             adapter = ProductsAdapter()
             binding.rvProducts.adapter = adapter
