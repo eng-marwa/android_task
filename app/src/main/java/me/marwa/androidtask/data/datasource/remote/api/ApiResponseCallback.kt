@@ -1,4 +1,4 @@
-package me.marwa.androidtask.data.model
+package me.marwa.androidtask.data.datasource.remote.api
 
 import me.marwa.androidtask.app.BaseException
 

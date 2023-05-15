@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_clothes"
+        android:icon="@drawable/jacket"
+        android:title="@string/clothes" />
+
+    <item
+        android:id="@+id/navigation_jewelery"
+        android:icon="@drawable/diamond_necklace"
+        android:title="@string/jewelery" />
+
+    <item
+        android:id="@+id/navigation_electronics"
+        android:icon="@drawable/washing_machine"
+        android:title="@string/electronics" />
+
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/cart"
+        android:title="@string/cart" />
+
+</menu>

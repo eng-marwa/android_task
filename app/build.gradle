@@ -76,7 +76,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.5.5"
 
     // lifecycle
-    implementation group: 'androidx.lifecycle', name:'lifecycle-viewmodel-ktx', version: '2.6.0-alpha03'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: '2.6.0-alpha03'
     //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -84,6 +84,11 @@ dependencies {
     //arrow
     implementation("io.arrow-kt:arrow-core:1.1.2")
 
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
 }
 
 kapt {

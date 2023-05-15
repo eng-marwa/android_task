@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/navigation_clothes">
+
+    <fragment
+        android:id="@+id/navigation_electronics"
+        android:name="me.marwa.androidtask.presentation.products.electronics.ElectronicsFragment"
+        android:label="fragment_electronics"
+        tools:layout="@layout/fragment_electronics" />
+    <fragment
+        android:id="@+id/navigation_clothes"
+        android:name="me.marwa.androidtask.presentation.products.clothes.ClothesFragment"
+        android:label="fragment_clothes"
+        tools:layout="@layout/fragment_clothes" />
+    <fragment
+        android:id="@+id/navigation_jewelery"
+        android:name="me.marwa.androidtask.presentation.products.jewelery.JeweleryFragment"
+        android:label="fragment_jewelery"
+        tools:layout="@layout/fragment_jewelery" />
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="me.marwa.androidtask.presentation.cart.view.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+</navigation>

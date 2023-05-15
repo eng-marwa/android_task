@@ -2,7 +2,6 @@ package me.marwa.androidtask.data.datasource.remote.api
 
 import android.util.Log
 import me.marwa.androidtask.app.BaseException
-import me.marwa.androidtask.data.model.ApiResponseCallbacks
 import me.marwa.androidtask.utils.toApiErrorBody
 import retrofit2.Response
 

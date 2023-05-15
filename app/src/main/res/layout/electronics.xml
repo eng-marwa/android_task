@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/_8sdp"
+    android:background="@drawable/ic_box"
+    android:padding="@dimen/_8sdp">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivItemPic"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivItemPic"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        app:strokeWidth="1dp" />
+
+
+
+        <TextView
+            android:id="@+id/lbItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivItemPic"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivItemPic"
+            tools:text="productName" />
+
+
+        <TextView
+            android:id="@+id/lbItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lbItemName"
+            tools:text="110.00" />
+
+        <Button
+            android:id="@+id/btnCart"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@drawable/ic_red_rect"
+            app:backgroundTint="@color/red"
+            app:icon="@drawable/ic_cart"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lbItemName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
