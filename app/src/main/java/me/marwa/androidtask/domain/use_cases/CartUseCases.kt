@@ -52,6 +52,16 @@ class CartUseCases(private val cartRepository: CartRepository) {
 
     }
 
+    suspend fun deleteAllItems(onSuccess: (Boolean) -> Unit,
+                               onError: (BaseException) -> Unit) {
+
+        if(cartRepository.deleteAllItems()){
+            onSuccess(true)
+        }else{
+            onError(BaseException(message = "Can't clear your cart"))
+        }
+
+    }
 
 
 }

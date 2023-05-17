@@ -20,6 +20,7 @@ class CartViewModel @Inject constructor(
     val savedCartItemsLiveData = MutableLiveData<Either<CartEntity, BaseException>>()
     val deletedCartItemsLiveData = MutableLiveData<Either<Int, BaseException>>()
     val updatedCartItemsLiveData = MutableLiveData<Either<Int, BaseException>>()
+    val deleteAllItemsLiveData = MutableLiveData<Either<Boolean, BaseException>>()
     fun getCartItems() {
         viewModelScope.launch {
             cartUseCases.invoke(onSuccess = {
@@ -74,6 +75,20 @@ class CartViewModel @Inject constructor(
     fun updateQty(cart: CartEntity) {
         cart.qty++
         updateItem(cart)
+    }
+
+    fun deleteAllItems() {
+        viewModelScope.launch {
+            cartUseCases.deleteAllItems(onSuccess = {
+                it?.let {
+                    deleteAllItemsLiveData.value = Either.Left(true)
+                }
+            }, onError = {
+                deleteAllItemsLiveData.value = Either.Right(it)
+
+            })
+        }
+
     }
 
     companion object {

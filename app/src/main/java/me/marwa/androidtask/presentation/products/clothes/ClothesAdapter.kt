@@ -51,7 +51,7 @@ class ClothesAdapter(private var itemClicked: ProductItemAction) :
                 itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
-
+                itemClicked.addItemToCart(product)
             }
         }
     }
