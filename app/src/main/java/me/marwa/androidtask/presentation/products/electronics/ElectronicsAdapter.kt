@@ -8,8 +8,9 @@ import com.bumptech.glide.Glide
 import me.marwa.androidtask.data.model.Product
 import me.marwa.androidtask.databinding.ElectronicsBinding
 import me.marwa.androidtask.domain.entity.CartEntity
+import me.marwa.androidtask.presentation.products.clothes.ClothesAdapter
 
-class ElectronicsAdapter : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsViewHolder>() {
+class ElectronicsAdapter(private var itemClicked: ProductItemAction) : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsViewHolder>() {
     private lateinit var context: Context
     private val products = arrayListOf<Product>()
 
@@ -30,9 +31,9 @@ class ElectronicsAdapter : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsVi
 
         }
 
-        fun onEvent() {
+        fun onEvent(product: Product) {
             binding.root.setOnClickListener {
-
+                itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
 
@@ -47,7 +48,7 @@ class ElectronicsAdapter : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsVi
 
     override fun onBindViewHolder(holder: ElectronicsViewHolder, position: Int) {
         holder.bind(products[position])
-        holder.onEvent()
+        holder.onEvent(products[position])
     }
 
     fun setData(products: List<Product>) {
@@ -56,5 +57,7 @@ class ElectronicsAdapter : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsVi
         notifyDataSetChanged()
     }
 
-
+    interface ProductItemAction {
+        fun onItemClick(item: Product)
+    }
 }

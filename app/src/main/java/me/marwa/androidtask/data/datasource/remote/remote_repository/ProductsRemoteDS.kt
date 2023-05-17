@@ -4,7 +4,6 @@ import me.marwa.androidtask.data.datasource.remote.api.ApiServices
 import me.marwa.androidtask.data.datasource.remote.api.BaseApiProvider
 import me.marwa.androidtask.data.datasource.remote.api.ApiResponseCallbacks
 import me.marwa.androidtask.data.model.Product
-import me.marwa.androidtask.data.model.ResponseProducts
 import me.marwa.androidtask.utils.ui
 import javax.inject.Inject
 

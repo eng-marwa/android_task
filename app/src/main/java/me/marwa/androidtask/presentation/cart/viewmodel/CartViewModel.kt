@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.marwa.androidtask.app.BaseException
 import me.marwa.androidtask.domain.entity.CartEntity
 import me.marwa.androidtask.domain.use_cases.CartUseCases
 import javax.inject.Inject
 
+@HiltViewModel
 class CartViewModel @Inject constructor(
     private val cartUseCases: CartUseCases,
 ) : ViewModel() {
@@ -68,7 +70,6 @@ class CartViewModel @Inject constructor(
             })
         }
     }
-
 
     fun updateQty(cart: CartEntity) {
         cart.qty++

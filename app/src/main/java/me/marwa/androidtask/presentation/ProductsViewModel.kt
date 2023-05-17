@@ -1,4 +1,4 @@
-package me.marwa.androidtask
+package me.marwa.androidtask.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,6 @@ import arrow.core.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
 import me.marwa.androidtask.app.BaseException
 import me.marwa.androidtask.data.model.Product
-import me.marwa.androidtask.data.model.ResponseProducts
 import me.marwa.androidtask.domain.use_cases.ProductsUseCases
 import javax.inject.Inject
 

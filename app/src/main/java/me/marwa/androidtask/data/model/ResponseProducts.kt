@@ -1,13 +1,14 @@
 package me.marwa.androidtask.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class ResponseProducts(val products: List<Product>)
-
+@Parcelize
 data class Product(
 
     @SerializedName("id")
-    var id: Int? = null,
+    var id: String? = null,
 
     @SerializedName("title")
     var title: String? = null,
@@ -26,11 +27,12 @@ data class Product(
 
     @SerializedName("rating")
     var rating: Rating? = Rating()
-)
+) : Parcelable
 
+@Parcelize
 data class Rating(
 
     @SerializedName("rate") var rate: Double? = null,
     @SerializedName("count") var count: Int? = null
 
-)
+) : Parcelable

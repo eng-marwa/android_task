@@ -1,22 +1,21 @@
 package me.marwa.androidtask.presentation.products.electronics
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import me.marwa.androidtask.ProductsViewModel
-import me.marwa.androidtask.R
-import me.marwa.androidtask.databinding.FragmentClothesBinding
+import me.marwa.androidtask.presentation.ProductsViewModel
+import me.marwa.androidtask.data.model.Product
 import me.marwa.androidtask.databinding.FragmentElectronicsBinding
-import me.marwa.androidtask.presentation.products.clothes.ClothesAdapter
-import me.marwa.androidtask.presentation.products.clothes.ClothesFragment
+import me.marwa.androidtask.presentation.ItemActivity
 import me.marwa.androidtask.utils.showToast
 
-class ElectronicsFragment : Fragment() {
+class ElectronicsFragment : Fragment(), ElectronicsAdapter.ProductItemAction {
     private var _binding: FragmentElectronicsBinding? = null
     val binding get() = _binding!!
 
@@ -46,7 +45,7 @@ class ElectronicsFragment : Fragment() {
     private fun setupElectronicsRV() {
         context?.let { context ->
             binding.rvElectronics.layoutManager = GridLayoutManager(context, 1)
-            adapter = ElectronicsAdapter()
+            adapter = ElectronicsAdapter(this)
             binding.rvElectronics.adapter = adapter
         }
     }
@@ -72,5 +71,13 @@ class ElectronicsFragment : Fragment() {
 
                 }
             }
+    }
+
+    override fun onItemClick(item: Product) {
+        activity?.let {
+            startActivity(Intent(it, ItemActivity::class.java).apply {
+                putExtra("product",item)
+            })
+        }
     }
 }

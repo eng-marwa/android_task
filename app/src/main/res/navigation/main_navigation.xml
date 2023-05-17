@@ -9,20 +9,54 @@
         android:id="@+id/navigation_electronics"
         android:name="me.marwa.androidtask.presentation.products.electronics.ElectronicsFragment"
         android:label="fragment_electronics"
-        tools:layout="@layout/fragment_electronics" />
+        tools:layout="@layout/fragment_electronics">
+        <action
+            android:id="@+id/action_navigation_electronics_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_clothes"
         android:name="me.marwa.androidtask.presentation.products.clothes.ClothesFragment"
         android:label="fragment_clothes"
-        tools:layout="@layout/fragment_clothes" />
+        tools:layout="@layout/fragment_clothes">
+        <action
+            android:id="@+id/action_navigation_clothes_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_jewelery"
         android:name="me.marwa.androidtask.presentation.products.jewelery.JeweleryFragment"
         android:label="fragment_jewelery"
-        tools:layout="@layout/fragment_jewelery" />
+        tools:layout="@layout/fragment_jewelery">
+        <action
+            android:id="@+id/action_navigation_jewelery_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_cart"
         android:name="me.marwa.androidtask.presentation.cart.view.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_navigation_cart_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_search"-->
+<!--        android:name="me.marwa.androidtask.presentation.search.view.SearchFragment"-->
+<!--        android:label="SearchFragment"-->
+<!--        tools:layout="@layout/fragment_search">-->
+<!--        <action-->
+<!--            android:id="@+id/action_navigation_search_to_navigation_details"-->
+<!--            app:destination="@id/navigation_details" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_details"-->
+<!--        android:name="me.marwa.androidtask.presentation.products.details.ProductDetailsFragment"-->
+<!--        android:label="ProductDetailsFragment"-->
+<!--        tools:layout="@layout/fragment_product_details">-->
+<!--        <argument-->
+<!--            android:name="product"-->
+<!--            app:argType="me.marwa.androidtask.data.model.Product" />-->
+<!--    </fragment>-->
 </navigation>

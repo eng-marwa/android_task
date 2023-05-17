@@ -10,7 +10,8 @@ import me.marwa.androidtask.data.model.Product
 import me.marwa.androidtask.databinding.MenBinding
 import me.marwa.androidtask.databinding.WomenBinding
 
-class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ClothesAdapter(private var itemClicked: ProductItemAction) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     private val clothes = arrayListOf<Product>()
     override fun getItemViewType(position: Int): Int {
@@ -28,9 +29,10 @@ class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     WomenBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 )
 
-            else -> MenViewHolder(
-                MenBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+            else ->
+                MenViewHolder(
+                    MenBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                )
         }
     }
 
@@ -44,9 +46,9 @@ class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.lbType.text = context.getString(R.string.women)
         }
 
-        fun onEvent() {
+        fun onEvent(product: Product) {
             binding.root.setOnClickListener {
-
+                itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
 
@@ -64,9 +66,9 @@ class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.lbType.text = context.getString(R.string.men)
         }
 
-        fun onEvent() {
+        fun onEvent(product: Product) {
             binding.root.setOnClickListener {
-
+                itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
 
@@ -83,13 +85,13 @@ class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             MEN -> {
                 val mHolder = holder as MenViewHolder
                 mHolder.bind(clothes[position])
-                mHolder.onEvent()
+                mHolder.onEvent(clothes[position])
             }
 
             else -> {
                 val wHolder = holder as WomenViewHolder
                 wHolder.bind(clothes[position])
-                wHolder.onEvent()
+                wHolder.onEvent(clothes[position])
             }
         }
     }
@@ -103,5 +105,9 @@ class ClothesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val MEN = 0
         const val WOMEN = 1
+    }
+
+    interface ProductItemAction {
+        fun onItemClick(item: Product)
     }
 }

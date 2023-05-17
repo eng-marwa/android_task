@@ -11,4 +11,9 @@
     <string name="women">Women</string>
     <string name="men">Men</string>
     <string name="quantity">Qty</string>
+    <string name="search_hint">Search</string>
+    <string name="check_internet_connection">No Internet Connection</string>
+    <string name="description">Description</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="item_added_successfully">Item Added Successfully</string>
 </resources>

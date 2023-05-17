@@ -1,23 +1,22 @@
 package me.marwa.androidtask.presentation.products.jewelery
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import me.marwa.androidtask.ProductsViewModel
-import me.marwa.androidtask.R
-import me.marwa.androidtask.databinding.FragmentClothesBinding
+import me.marwa.androidtask.presentation.ProductsViewModel
+import me.marwa.androidtask.data.model.Product
 import me.marwa.androidtask.databinding.FragmentJeweleryBinding
-import me.marwa.androidtask.presentation.products.clothes.ClothesAdapter
-import me.marwa.androidtask.presentation.products.clothes.ClothesFragment
+import me.marwa.androidtask.presentation.ItemActivity
 import me.marwa.androidtask.utils.showToast
 
 
-class JeweleryFragment : Fragment() {
+class JeweleryFragment : Fragment(), JeweleryAdapter.ProductItemAction {
     private var _binding: FragmentJeweleryBinding? = null
     val binding get() = _binding!!
 
@@ -46,8 +45,8 @@ class JeweleryFragment : Fragment() {
 
     private fun setupJeweleryRV() {
         context?.let { context ->
-            binding.rvJewelery.layoutManager = GridLayoutManager(context,3)
-            adapter = JeweleryAdapter()
+            binding.rvJewelery.layoutManager = GridLayoutManager(context, 3)
+            adapter = JeweleryAdapter(this)
             binding.rvJewelery.adapter = adapter
         }
     }
@@ -65,6 +64,7 @@ class JeweleryFragment : Fragment() {
 
     companion object {
         private const val TAG = "JeweleryFragment"
+
         @JvmStatic
         fun newInstance() =
             JeweleryFragment().apply {
@@ -72,5 +72,13 @@ class JeweleryFragment : Fragment() {
 
                 }
             }
+    }
+
+    override fun onItemClick(item: Product) {
+        activity?.let {
+            startActivity(Intent(it, ItemActivity::class.java).apply {
+                putExtra("product",item)
+            })
+        }
     }
 }

@@ -67,7 +67,6 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCart"
-        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_25sdp"
         android:layout_gravity="center"

@@ -10,13 +10,17 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.marwa.androidtask.BuildConfig
 import me.marwa.androidtask.app.MyApp
+import me.marwa.androidtask.data.datasource.local.room.CartDao
 import me.marwa.androidtask.data.datasource.local.room.MyAppRoomDatabase
 import me.marwa.androidtask.data.datasource.remote.api.ApiServices
 import me.marwa.androidtask.data.datasource.remote.remote_repository.ProductsRemoteDS
 import me.marwa.androidtask.data.datasource.remote.remote_repository.ProductsRemoteDSImp
 import me.marwa.androidtask.domain.entity.CartEntity
+import me.marwa.androidtask.domain.repository.CartRepository
+import me.marwa.androidtask.domain.repository.CartRepositoryImp
 import me.marwa.androidtask.domain.repository.ProductsRepository
 import me.marwa.androidtask.domain.repository.ProductsRepositoryImp
+import me.marwa.androidtask.domain.use_cases.CartUseCases
 import me.marwa.androidtask.domain.use_cases.ProductsUseCases
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -77,14 +81,12 @@ class AppModule {
         }
     }
 
-
     @Provides
     @Singleton
     internal fun provideCache(context: Context): Cache {
         val httpCacheDirectory = File(context.cacheDir.absolutePath, "HttpCache")
         return Cache(httpCacheDirectory, CACHE_SIZE_BYTES)
     }
-
 
     @Provides
     @Singleton
@@ -98,7 +100,6 @@ class AppModule {
         return retrofit.create(ApiServices::class.java)
     }
 
-
     @Provides
     @Singleton
     fun provideRemoteProductsDS(api: ApiServices): ProductsRemoteDS {
@@ -107,13 +108,13 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideCategoryDSRepository(productsRemoteDS: ProductsRemoteDS): ProductsRepository {
+    fun provideProductDSRepository(productsRemoteDS: ProductsRemoteDS): ProductsRepository {
         return ProductsRepositoryImp(productsRemoteDS)
     }
 
     @Provides
     @Singleton
-    fun provideOptionsUseCase(productsRepository: ProductsRepository): ProductsUseCases {
+    fun provideProductUseCase(productsRepository: ProductsRepository): ProductsUseCases {
         return ProductsUseCases(productsRepository)
     }
 
@@ -128,4 +129,16 @@ class AppModule {
 
     @Provides
     fun provideEntity() = CartEntity()
+
+    @Provides
+    @Singleton
+    fun provideCartDSRepository(cartDao: CartDao): CartRepository {
+        return CartRepositoryImp(cartDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCartUseCase(cartRepository: CartRepository): CartUseCases {
+        return CartUseCases(cartRepository)
+    }
 }

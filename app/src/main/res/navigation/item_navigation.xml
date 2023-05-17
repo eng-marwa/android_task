@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_navigation">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="me.marwa.androidtask.presentation.search.view.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="me.marwa.androidtask.presentation.products.details.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="product"
+            app:argType="me.marwa.androidtask.data.model.Product" />
+    </fragment>
+</navigation>
