@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.marwa.androidtask.R
 import me.marwa.androidtask.presentation.MainActivity
 import me.marwa.androidtask.data.model.Product
@@ -69,6 +70,7 @@ class ProductDetailsFragment : Fragment() {
             binding.lbItemPrice.text = "${product.price} $"
             binding.lbType.text = product.category
             binding.lbDescriptionText.text = product.description
+            binding.lbRatingValue.text = "${product.rating?.rate}"
             context?.let {
                 Glide.with(it).asBitmap().load(product.image).into(binding.ivImage)
             }
@@ -100,32 +102,45 @@ class ProductDetailsFragment : Fragment() {
                     }
                 }
             }
+            binding.btnIncrement.setOnClickListener {
+                var count = binding.lbQuantityValue.text.toString().toInt()
+                binding.lbQuantityValue.text = "${++count}"
+            }
+            binding.btnDecrement.setOnClickListener {
+                var count = binding.lbQuantityValue.text.toString().toInt()
+                if (count != 0) {
+                    binding.lbQuantityValue.text = "${--count}"
+                }
+            }
         }
     }
 
-    private fun collectItems(cart: CartEntity) {
+    private suspend fun collectItems(cart: CartEntity) {
         var updated = false
         cartViewModel.getCartItems()
-        cartViewModel.cartItemsLiveData.observe(viewLifecycleOwner) {
-            it?.fold({ cartItems ->
-                if (it != null) {
-                    for (i in cartItems.indices) {
-                        if (cartItems[i].productId == cart.productId) {
-                            updated = true
-                            cartViewModel.updateQty(cartItems[i])
-                            binding.btnAddToCart.visibility = View.GONE
+        withContext(Dispatchers.Main) {
+            cartViewModel.cartItemsLiveData.observe(viewLifecycleOwner) {
+                it?.fold({ cartItems ->
+                    if (it != null) {
+                        for (i in cartItems.indices) {
+                            if (cartItems[i].productId == cart.productId) {
+                                updated = true
+                                cartViewModel.updateQty(cartItems[i])
+                                binding.btnAddToCart.visibility = View.GONE
 
-                            break
+                                break
+                            }
+
                         }
-
                     }
-                }
-                if (!updated) {
+                    if (!updated) {
+                        cartViewModel.saveItem(cart)
+                    }
+                }, {
                     cartViewModel.saveItem(cart)
-                }
-            }, {
-                showToast(it?.getMessage())
-            })
+
+                })
+            }
         }
     }
 

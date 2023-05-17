@@ -42,7 +42,7 @@ class ClothesAdapter(private var itemClicked: ProductItemAction) :
             Glide.with(context).asBitmap().load(product.image).into(binding.ivItemPic)
             binding.lbItemName.text = product.title
             binding.lbItemPrice.text = "${product.price} $"
-            binding.lbRating.text = "${product.rating?.count}"
+            binding.lbRating.text = "${product.rating?.rate}"
             binding.lbType.text = context.getString(R.string.women)
         }
 
@@ -62,7 +62,7 @@ class ClothesAdapter(private var itemClicked: ProductItemAction) :
             Glide.with(context).asBitmap().load(product.image).into(binding.ivItemPic)
             binding.lbItemName.text = product.title
             binding.lbItemPrice.text = "${product.price} $"
-            binding.lbRating.text = "${product.rating?.count}"
+            binding.lbRating.text = "${product.rating?.rate}"
             binding.lbType.text = context.getString(R.string.men)
         }
 
@@ -71,7 +71,7 @@ class ClothesAdapter(private var itemClicked: ProductItemAction) :
                 itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
-
+                itemClicked.addItemToCart(product)
             }
         }
     }
@@ -109,5 +109,6 @@ class ClothesAdapter(private var itemClicked: ProductItemAction) :
 
     interface ProductItemAction {
         fun onItemClick(item: Product)
+        fun addItemToCart(item: Product)
     }
 }

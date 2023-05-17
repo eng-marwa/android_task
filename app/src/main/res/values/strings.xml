@@ -16,4 +16,9 @@
     <string name="description">Description</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="item_added_successfully">Item Added Successfully</string>
+    <string name="rating">Rating</string>
+    <string name="item_deleted_successfully">Item Deleted Successfully</string>
+    <string name="proceed_to_checkout">Checkout</string>
+    <string name="invoice_total">Invoice Total</string>
+    <string name="congratulations">Congratulations,Your order will arrive within two working days</string>
 </resources>

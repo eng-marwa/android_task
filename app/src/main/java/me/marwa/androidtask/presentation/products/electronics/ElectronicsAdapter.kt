@@ -10,7 +10,8 @@ import me.marwa.androidtask.databinding.ElectronicsBinding
 import me.marwa.androidtask.domain.entity.CartEntity
 import me.marwa.androidtask.presentation.products.clothes.ClothesAdapter
 
-class ElectronicsAdapter(private var itemClicked: ProductItemAction) : RecyclerView.Adapter<ElectronicsAdapter.ElectronicsViewHolder>() {
+class ElectronicsAdapter(private var itemClicked: ProductItemAction) :
+    RecyclerView.Adapter<ElectronicsAdapter.ElectronicsViewHolder>() {
     private lateinit var context: Context
     private val products = arrayListOf<Product>()
 
@@ -36,7 +37,7 @@ class ElectronicsAdapter(private var itemClicked: ProductItemAction) : RecyclerV
                 itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
-
+                itemClicked.addItemToCart(product)
             }
         }
     }
@@ -59,5 +60,6 @@ class ElectronicsAdapter(private var itemClicked: ProductItemAction) : RecyclerV
 
     interface ProductItemAction {
         fun onItemClick(item: Product)
+        fun addItemToCart(product: Product)
     }
 }

@@ -51,9 +51,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_weight="1"
                     android:maxLines="2"
-                    android:layout_marginBottom="@dimen/_8sdp"
                     android:paddingVertical="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp"
@@ -75,6 +75,37 @@
                 android:id="@+id/ivImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_173sdp" />
+
+            <TextView
+                android:id="@+id/lbRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rvOptions"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/rating"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lbTopSellers"
+                android:src="@drawable/ic_seperator" />
+
+            <TextView
+                android:id="@+id/lbRatingValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rvOptions"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:drawableStart="@drawable/star"
+                android:drawablePadding="@dimen/_8sdp"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
 
             <TextView
                 android:id="@+id/lbQuantity"

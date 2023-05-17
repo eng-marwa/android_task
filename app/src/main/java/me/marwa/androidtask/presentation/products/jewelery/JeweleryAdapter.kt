@@ -35,7 +35,7 @@ class JeweleryAdapter(private var itemClicked: ProductItemAction) : RecyclerView
                 itemClicked.onItemClick(product)
             }
             binding.btnCart.setOnClickListener {
-
+            itemClicked.addItemToCart(product)
             }
         }
     }
@@ -57,6 +57,7 @@ class JeweleryAdapter(private var itemClicked: ProductItemAction) : RecyclerView
     }
 
     interface ProductItemAction {
-        fun onItemClick(item: Product)
+        fun onItemClick(product: Product)
+        fun addItemToCart(product: Product)
     }
 }

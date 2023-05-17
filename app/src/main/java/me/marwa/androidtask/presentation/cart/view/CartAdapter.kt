@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import me.marwa.androidtask.databinding.CartBinding
 import me.marwa.androidtask.domain.entity.CartEntity
+import me.marwa.androidtask.presentation.products.electronics.ElectronicsAdapter
 
 class CartAdapter :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
@@ -40,50 +41,44 @@ class CartAdapter :
 
     }
 
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+        val cart = list[position]
+        holder.lbItemName.text = cart.productName
+        holder.lbQty.text = "${cart.qty}"
+        holder.lbItemPrice.text = "${cart.productPrice * cart.qty}"
 
-    companion object {
-        val differCallback = object : DiffUtil.ItemCallback<CartEntity>() {
-            override fun areItemsTheSame(
-                oldItem: CartEntity,
-                newItem: CartEntity
-            ): Boolean {
-                return oldItem.productId == newItem.productId
-            }
+        if (b) {
+            sum += holder.lbItemPrice.text.toString().toDouble()
+            totalMap[cart.productId] = holder.lbItemPrice.text.toString().toDouble()
+            updateTotal()
+        }
 
-            override fun areContentsTheSame(
-                oldItem: CartEntity,
-                newItem: CartEntity
-            ): Boolean {
-                return oldItem == newItem
+        context.let {
+            try {
+                Glide.with(context)
+                    .asBitmap()
+                    .load(cart.productImage)
+                    .into(holder.ivItemPic)
+            } catch (e: Exception) {
             }
         }
-    }
+        holder.btnIncrement.setOnClickListener {
+            var count = holder.lbQty.text.toString().toInt()
+            holder.lbQty.text = "${++count}"
+            holder.lbItemPrice.text = "${count * cart.productPrice}"
+            cart.qty = count
+            updateItem(cart)
+            sum = 0.0
+            sum += holder.lbItemPrice.text.toString().toDouble()
+            totalMap[cart.productId] = holder.lbItemPrice.text.toString().toDouble()
+            updateTotal()
 
-    override fun onBindViewHolder(mHolder: CartViewHolder, position: Int) {
-        if (position < list.size) {
-            val holder = mHolder as CartViewHolder
-            val cart = list[position]
-            holder.lbItemName.text = cart.productName
-            holder.lbQty.text = "${cart.qty}"
-            if (b) {
-                sum += holder.lbItemPrice.text.toString().toDouble()
-                totalMap[cart.productId] = holder.lbItemPrice.text.toString().toDouble()
-                updateTotal()
-            }
-            val sb = StringBuilder()
+        }
 
-            context.let {
-                try {
-                    Glide.with(context)
-                        .asBitmap()
-                        .load(cart.productImage)
-                        .into(holder.ivItemPic)
-                } catch (e: Exception) {
-                }
-            }
-            holder.btnIncrement.setOnClickListener {
-                var count = holder.lbQty.text.toString().toInt()
-                holder.lbQty.text = "${++count}"
+        holder.btnDecrement.setOnClickListener {
+            var count = holder.lbQty.text.toString().toInt()
+            if (count != 1) {
+                holder.lbQty.text = "${--count}"
                 holder.lbItemPrice.text = "${count * cart.productPrice}"
                 cart.qty = count
                 updateItem(cart)
@@ -91,50 +86,30 @@ class CartAdapter :
                 sum += holder.lbItemPrice.text.toString().toDouble()
                 totalMap[cart.productId] = holder.lbItemPrice.text.toString().toDouble()
                 updateTotal()
-
-            }
-
-            holder.btnDecrement.setOnClickListener {
-                var count = holder.lbQty.text.toString().toInt()
-                if (count != 1) {
-                    holder.lbQty.text = "${--count}"
-                    holder.lbItemPrice.text = "${count * cart.productPrice}"
-                    cart.qty = count
-                    updateItem(cart)
-                    sum = 0.0
-                    sum += holder.lbItemPrice.text.toString().toDouble()
-                    totalMap[cart.productId] = holder.lbItemPrice.text.toString().toDouble()
-                    updateTotal()
-                }
-            }
-
-
-
-            holder.itemView.setOnClickListener {
-                val qty = holder.lbQty.text.toString().toInt()
-                cart.qty = qty
-                context.let {
-
-                }
-            }
-
-            holder.btnDelete.setOnClickListener {
-                deleteItem(cart)
-                b = false
             }
         }
+
+
+
+        holder.itemView.setOnClickListener {
+            val qty = holder.lbQty.text.toString().toInt()
+            cart.qty = qty
+            context.let {
+
+            }
+        }
+
+        holder.btnDelete.setOnClickListener {
+            deleteItem(cart)
+            b = false
+        }
     }
+
 
     private fun updateTotal() {
         var total = 0.0
         totalMap.values.forEach { v -> total += v }
         totalLiveEvent.value = total
-    }
-
-    private fun deleteItems() {
-        deleteAllItemsLiveEvent.value = true
-        list.clear()
-        notifyDataSetChanged()
     }
 
     private fun updateItem(cart: CartEntity) {
@@ -175,4 +150,6 @@ class CartAdapter :
     override fun getItemCount(): Int {
         return list.size
     }
+
+
 }
